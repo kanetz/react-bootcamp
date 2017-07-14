@@ -1,0 +1,7 @@
+{
+  "name": "react-bootcamp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:kanetz/react-bootcamp.git",
+  "license": "MIT"
+}
