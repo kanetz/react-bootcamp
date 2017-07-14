@@ -1,7 +1,17 @@
 {
   "name": "react-bootcamp",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:kanetz/react-bootcamp.git",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "./node_modules/.bin/babel src -d lib",
+    "test": "./node_modules/.bin/mocha --compilers js:babel-register"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
+  }
 }

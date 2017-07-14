@@ -59,3 +59,6 @@ typings/
 
 # IDE
 .idea/
+
+# Babel destination directory
+lib/
