@@ -11,10 +11,12 @@ describe('PhotoStore', () => {
 
     describe('add(photo)', () => {
         it('should add into photoMap the given photo and return the new id', () => {
-            const id = store.add({});
+            const id1 = store.add({});
+            const id2 = store.add({});
 
-            expect(id).to.be.equal(1);
-            expect(store.find().length).to.be.equal(1);
+            expect(id1).to.be.equal(1);
+            expect(id2).to.be.equal(2);
+            expect(store.find().length).to.be.equal(2);
         });
     });
 
