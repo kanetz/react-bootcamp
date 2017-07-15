@@ -1,15 +1,19 @@
+// @flow
 'use strict';
 
 class PhotoStore {
+    photoMap: {[number]: {id: number, description: string, url: string}};
+    newId: number;
+
     constructor() {
         this.photoMap = {};
         this.newId = 1;
     }
 
-    find(term?: string): {id: number, description: string, url: string} {
-        const allPhotos = Object.values(this.photoMap);
-        return term ?
-            allPhotos.filter(photo => (photo.description||'').includes(term)) :
+    find(term?: string): {id: number, description: string, url: string}[] {
+        const allPhotos = (Object.values(this.photoMap): any);
+        return (term: any) ?
+            allPhotos.filter(photo => photo.description.includes(term)) :
             allPhotos;
     }
 

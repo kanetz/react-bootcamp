@@ -1,13 +1,13 @@
+// @flow
+'use strict';
+
 import PhotoStore from '../src/photo-store.js';
 import {expect} from 'chai'
 
 describe('PhotoStore', () => {
-    'use strict';
     let store;
 
-    beforeEach(() => {
-        store = new PhotoStore();
-    });
+    beforeEach(() => store = new PhotoStore());
 
     describe('add(photo)', () => {
         it('should add into photoMap the given photo and return the new id', () => {
@@ -91,10 +91,22 @@ describe('PhotoStore', () => {
         });
 
         it('should return all photos when no term is given', () => {
-            store.add({});
-            store.add({});
+            store.add({description: 'term1'});
+            store.add({description: 'term2'});
 
             expect(store.find().length).to.equal(2);
+        });
+
+        it('should NOT throw exception on photos with description as NULL', () => {
+            store.add({description: null});
+
+            expect(() => store.find().length).to.not.throw;
+        });
+
+        it('should NOT throw exception on photos with NO description', () => {
+            store.add({});
+
+            expect(() => store.find().length).to.not.throw;
         });
     });
 });
