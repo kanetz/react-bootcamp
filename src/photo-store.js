@@ -12,8 +12,8 @@ class PhotoStore {
 
     find(term?: string): {id: number, description: string, url: string}[] {
         const allPhotos = (Object.values(this.photoMap): any);
-        return (term: any) ?
-            allPhotos.filter(photo => photo.description.includes(term)) :
+        return term ?
+            allPhotos.filter(photo => photo.description.includes(((term: any): string))) :
             allPhotos;
     }
 
