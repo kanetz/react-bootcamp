@@ -1,6 +1,8 @@
 // @flow
 'use strict';
 
+import { NonExistentIdError } from './errors';
+
 type Photo = {id: number, description: string, url: string};
 
 class PhotoStore {
@@ -27,20 +29,20 @@ class PhotoStore {
 
     get(id: number): Photo {
         const photo = this.photoMap[id];
-        if(!photo) throw `Cannot get photo with an non-existent id ${id}`;
+        if(!photo) throw new NonExistentIdError(id);
 
         return photo;
     }
 
     remove(id: number): void {
-        if(!this.photoMap[id]) throw `Cannot remove photo with an non-existent id ${id}`;
+        if(!this.photoMap[id]) throw new NonExistentIdError(id);
 
         delete this.photoMap[id];
     }
 
-    update(photo: Photo): void {
+    edit(photo: Photo): void {
         const id = photo.id;
-        if(!this.photoMap[id]) throw `Cannot update photo with an non-existent id ${id}`;
+        if(!this.photoMap[id]) throw new NonExistentIdError(id);
 
         this.photoMap[id] = photo;
     }

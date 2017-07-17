@@ -2,6 +2,7 @@
 'use strict';
 
 import PhotoStore from '../src/photo-store.js';
+import {NonExistentIdError} from '../src/errors';
 import {expect} from 'chai'
 
 describe('PhotoStore', () => {
@@ -29,14 +30,12 @@ describe('PhotoStore', () => {
             store.add({description: description, url: url});
 
             const expectedPhoto = {id: id, description: description, url: url};
-            expect(store.get(id)).to.deep.equal(expectedPhoto)
+            expect(store.get(id)).to.deep.equal(expectedPhoto);
         });
 
         it('should throw error when no photo matching the given id', () => {
             const invalidId = 1;
-            const expectedErrorMessage = `Cannot get photo with an non-existent id ${invalidId}`;
-
-            expect(() => store.get(invalidId)).to.throw(expectedErrorMessage);
+            expect(() => store.get(invalidId)).to.throw(NonExistentIdError, new RegExp(invalidId));
         });
     });
 
@@ -54,9 +53,7 @@ describe('PhotoStore', () => {
 
         it('should throw error when no photo matching the given id', () => {
             const invalidId = 1;
-            const expectedErrorMessage = `Cannot remove photo with an non-existent id ${invalidId}`;
-
-            expect(() => store.remove(invalidId)).to.throw(expectedErrorMessage);
+            expect(() => store.remove(invalidId)).to.throw(NonExistentIdError, new RegExp(invalidId));
         });
     });
 
@@ -66,16 +63,14 @@ describe('PhotoStore', () => {
             const description = 'description';
             const url = 'url';
 
-            store.update({id: id, description: description, url: url});
+            store.edit({id: id, description: description, url: url});
 
             expect(store.get(id)).to.deep.equal({id: id, description: description, url: url});
         });
 
         it('should throw error when no photo matching the given id', () => {
             const invalidId = 1;
-            const expectedErrorMessage = `Cannot update photo with an non-existent id ${invalidId}`;
-
-            expect(() => store.update({id: invalidId})).to.throw(expectedErrorMessage);
+            expect(() => store.edit({id: invalidId})).to.throw(NonExistentIdError, new RegExp(invalidId));
         });
     });
 
