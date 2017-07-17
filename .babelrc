@@ -4,6 +4,7 @@
     "flow"
   ],
   "plugins": [
+    "transform-runtime",
     "transform-object-rest-spread"
   ]
 }
