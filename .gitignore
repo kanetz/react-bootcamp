@@ -60,5 +60,5 @@ typings/
 # IDE
 .idea/
 
-# Babel destination directory
-lib/
+# Project distribution directory
+dist/
