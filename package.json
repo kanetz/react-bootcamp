@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "./node_modules/.bin/babel src -d lib",
-    "test": "./node_modules/.bin/nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-register"
+    "test": "./node_modules/.bin/nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-register",
+    "flow": "./node_modules/.bin/flow status --strip-root ./src"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -13,6 +14,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
     "chai": "^4.1.0",
+    "flow-bin": "^0.50.0",
     "mocha": "^3.4.2",
     "nyc": "^11.0.3"
   }

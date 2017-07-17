@@ -1,8 +1,10 @@
 // @flow
 'use strict';
 
+type Photo = {id: number, description: string, url: string};
+
 class PhotoStore {
-    photoMap: {[number]: {id: number, description: string, url: string}};
+    photoMap: {[number]: Photo};
     newId: number;
 
     constructor() {
@@ -10,7 +12,7 @@ class PhotoStore {
         this.newId = 1;
     }
 
-    find(term?: string): {id: number, description: string, url: string}[] {
+    find(term?: string): Photo[] {
         const allPhotos = (Object.values(this.photoMap): any);
         return term ?
             allPhotos.filter(photo => photo.description.includes(((term: any): string))) :
@@ -23,7 +25,7 @@ class PhotoStore {
         return id;
     }
 
-    get(id: number): {id: number, description: string, url: string} {
+    get(id: number): Photo {
         const photo = this.photoMap[id];
         if(!photo) throw `Cannot get photo with an non-existent id ${id}`;
 
@@ -36,7 +38,7 @@ class PhotoStore {
         delete this.photoMap[id];
     }
 
-    update(photo: {id: number, description: string, url: string}): void {
+    update(photo: Photo): void {
         const id = photo.id;
         if(!this.photoMap[id]) throw `Cannot update photo with an non-existent id ${id}`;
 
