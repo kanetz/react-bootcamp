@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "./node_modules/.bin/babel src -d lib",
-    "test": "./node_modules/.bin/nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-register",
+    "unittest": "./node_modules/.bin/nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-register --recursive test/unit",
+    "uitest": "./node_modules/.bin/mocha-webpack --webpack-config webpack.config.js -r jsdom-global/register --recursive test/ui",
     "flow": "./node_modules/.bin/flow status --strip-root ./src"
   },
   "devDependencies": {
@@ -17,16 +18,23 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.0",
+    "enzyme": "^2.9.1",
     "flow-bin": "^0.50.0",
     "gulp": "^3.9.1",
     "gulp-mocha": "^4.3.1",
     "html-webpack-plugin": "^2.29.0",
+    "jsdom": "^11.1.0",
+    "jsdom-global": "^3.0.2",
     "mocha": "^3.4.2",
+    "mocha-webpack": "^0.7.0",
     "nyc": "^11.0.3",
+    "react-addons-test-utils": "^15.6.0",
+    "react-test-renderer": "^15.6.1",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   }

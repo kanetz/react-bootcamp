@@ -1,8 +1,7 @@
 // @flow
-'use strict';
 
-import PhotoStore from '../src/photo-store.js';
-import {NonExistentIdError} from '../src/errors';
+import PhotoStore from '../../src/photo-store.js';
+import {NonExistentIdError} from '../../src/errors/index';
 import {expect} from 'chai'
 
 describe('PhotoStore', () => {

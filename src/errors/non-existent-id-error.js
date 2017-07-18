@@ -1,5 +1,4 @@
 // @flow
-'use strict';
 
 function NonExistentIdError(id: number) {
     this.name = 'NonExistentIdError';
