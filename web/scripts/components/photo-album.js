@@ -19,11 +19,13 @@ class PhotoAlbum extends React.Component {
     }
 
     addPhoto(photo) {
-        console.log('addPhoto: ', photo);
+        this.setState(prevState => ({
+            ...prevState,
+            photos: [...prevState.photos, photo],
+        }));
     }
 
     render() {
-        const noop = () => undefined;
         return (
             <Container>
                 <Header as="h1">Photo Gallery</Header>
