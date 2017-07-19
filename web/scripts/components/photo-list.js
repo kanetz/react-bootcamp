@@ -17,8 +17,6 @@ class PhotoList extends React.Component {
 PhotoList.propTypes = {
     photos: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
-        description: PropTypes.string,
-        url: PropTypes.string,
     })).isRequired,
 };
 
