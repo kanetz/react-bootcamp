@@ -4,33 +4,35 @@ import PropTypes from 'prop-types';
 class AddPhotoForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.defaultState = {
             filename: '',
             description: '',
         };
+        this.state = {...this.defaultState};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         this.setState({
-            [event.target.name]: event.target.value,
             ...this.state,
+            [event.target.name]: event.target.value,
         });
     }
 
     handleSubmit(event) {
         event.preventDefault();
         this.props.onAddPhoto({...this.state});
+        this.setState({...this.defaultState});
     }
 
     render() {
         return (
             <form className="add-photo-form">
                 <input type="file" name="filename"
-                       onChange={this.handleChange} />
+                       value={this.state.filename} onChange={this.handleChange} />
                 <input type="text" name="description" placeholder="Title"
-                       onChange={this.handleChange} />
+                       value={this.state.description} onChange={this.handleChange} />
                 <input type="submit" value="add"
                        onClick={this.handleSubmit} />
             </form>

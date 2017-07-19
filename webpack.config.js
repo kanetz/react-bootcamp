@@ -50,6 +50,11 @@ module.exports = {
     devServer: {
         contentBase: './dist',
     },
+    resolve: {
+        alias: {
+            '@components': `${webDir}/scripts/components`,
+        },
+    },
     externals: {
         'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
