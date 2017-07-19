@@ -1,24 +1,37 @@
 import React from 'react';
+import {Container, Header} from 'semantic-ui-react';
 
 import AddPhotoForm from './add-photo-form';
-import Photo from './photo';
+import PhotoList from './photo-list';
 
-function PhotoAlbum({photos = []}) {
-    return (
-        <div className="photo-album">
-            <h1>Photo Gallery</h1>
-            <AddPhotoForm onAddPhoto={data => {console.log(data)}} />
-            <ul className="photo-list">
-                {
-                    photos.map(photo => (
-                        <li className="photo-item" key={photo.id}>
-                            <Photo photo={photo} />
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
-    );
+class PhotoAlbum extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            photos: [
+                {id: 1, description: 'my image 1', url: ''},
+                {id: 2, description: 'my image 2', url: ''},
+                {id: 3, description: 'my image 3', url: ''},
+            ],
+        };
+        this.addPhoto = this.addPhoto.bind(this);
+    }
+
+    addPhoto(photo) {
+        console.log('addPhoto: ', photo);
+    }
+
+    render() {
+        const noop = () => undefined;
+        return (
+            <Container>
+                <Header as="h1">Photo Gallery</Header>
+                <PhotoList photos={this.state.photos}/>
+                <AddPhotoForm onAddPhoto={this.addPhoto}/>
+            </Container>
+        );
+    }
 }
 
 export default PhotoAlbum;

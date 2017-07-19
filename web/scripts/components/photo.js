@@ -1,24 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Card, Image} from 'semantic-ui-react';
 
 class Photo extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
+        const photo = this.props.photo;
         return (
-            <dl>
-                <dt>{this.props.photo.description}</dt>
-                <dd><img className="photo-image" src={this.props.photo.url}
-                         title="photo.description" alt={this.props.photo.description}/></dd>
-            </dl>
+            <Card>
+                <Image src={photo.url}/>
+                <Card.Content>
+                    <Card.Header>{photo.description}</Card.Header>
+                </Card.Content>
+            </Card>
         );
     }
 }
 
 Photo.propTypes = {
     photo: PropTypes.shape({
+        id: PropTypes.number.isRequired,
         description: PropTypes.string,
         url: PropTypes.string,
     }).isRequired,

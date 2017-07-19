@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Form} from 'semantic-ui-react';
 
 class AddPhotoForm extends React.Component {
     constructor(props) {
@@ -8,34 +9,33 @@ class AddPhotoForm extends React.Component {
             filename: '',
             description: '',
         };
-        this.state = {...this.defaultState};
+        this.state = this.defaultState;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.value,
-        });
+        const delta = {[event.target.name]: event.target.value};
+        this.setState(prevState => ({...prevState, ...delta}));
     }
 
     handleSubmit(event) {
         event.preventDefault();
         this.props.onAddPhoto({...this.state});
-        this.setState({...this.defaultState});
+        this.setState(this.defaultState);
     }
 
     render() {
         return (
-            <form className="add-photo-form">
-                <input type="file" name="filename"
-                       value={this.state.filename} onChange={this.handleChange} />
-                <input type="text" name="description" placeholder="Title"
-                       value={this.state.description} onChange={this.handleChange} />
-                <input type="submit" value="add"
-                       onClick={this.handleSubmit} />
-            </form>
+            <Form className="add-photo-form ui form">
+                <Form.Group>
+                    <Form.Input type="file" name="filename"
+                                value={this.state.filename} onChange={this.handleChange}/>
+                    <Form.Input type="text" name="description" placeholder="Title"
+                                value={this.state.description} onChange={this.handleChange}/>
+                    <Form.Button onClick={this.handleSubmit}>Add</Form.Button>
+                </Form.Group>
+            </Form>
         );
     }
 }

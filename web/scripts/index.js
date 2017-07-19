@@ -5,13 +5,11 @@ import {render} from 'react-dom';
 
 import PhotoAlbum from './components/photo-album';
 
-const photos = [
-    {id: 1, description: 'my image 1', url: ''},
-    {id: 2, description: 'my image 2', url: ''},
-    {id: 3, description: 'my image 3', url: ''},
-];
+import 'reset-css/reset.css';
+import 'semantic-ui-css/semantic.min.css';
+
 render(
-    <PhotoAlbum photos={photos} />,
+    <PhotoAlbum/>,
     document.getElementById('app')
 );
 
