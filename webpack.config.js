@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webDir = path.resolve(__dirname, 'web');
@@ -60,6 +61,11 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            }
+        }),
         new HtmlWebpackPlugin({
             template: `${webDir}/index.html`,
             inject: 'body',

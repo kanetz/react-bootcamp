@@ -9,7 +9,7 @@ class Photo extends React.Component {
             <Card>
                 <Image src={photo.url}/>
                 <Card.Content>
-                    <Card.Header>{photo.description}</Card.Header>
+                    <Card.Header className="photo-description">{photo.description}</Card.Header>
                 </Card.Content>
             </Card>
         );
