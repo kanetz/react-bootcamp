@@ -14,14 +14,23 @@ class PhotoAlbum extends React.Component {
                 {id: 2, description: 'my image 2', url: ''},
                 {id: 3, description: 'my image 3', url: ''},
             ],
+            nextId: 4,
         };
         this.addPhoto = this.addPhoto.bind(this);
     }
 
-    addPhoto(photo) {
+    addPhoto({description, url}) {
         this.setState(prevState => ({
             ...prevState,
-            photos: [...prevState.photos, photo],
+            photos: [
+                ...prevState.photos,
+                {
+                    id: prevState.nextId,
+                    description,
+                    url,
+                },
+            ],
+            nextId: prevState.nextId + 1,
         }));
     }
 

@@ -16,18 +16,19 @@ describe('<AddPhotoForm>', () => {
 
         it('should invoke callback with form data when add photo button is clicked', () => {
             const expectedFormData = {filename: 'filename', description: 'description'};
-            wrapper.setState(expectedFormData);
+            wrapper.setState({formData: expectedFormData});
 
-            wrapper.find('button').simulate('click');
+            wrapper.find('form').simulate('submit');
 
-            expect(callback.alwaysCalledWithExactly(expectedFormData)).to.be.true;
+            expect(callback.calledWith(expectedFormData), 'callback should be invoked').to.be.true;
         });
 
         it('should clear form data', () => {
             wrapper.find('button').simulate('click');
 
-            ['filename', 'description'].forEach(fieldName => {
-                expect(wrapper.state(fieldName), `${fieldName} should be cleared`).to.be.empty;
+            const fieldsToCheck = ['filename', 'description'];
+            fieldsToCheck.forEach(field => {
+                expect(wrapper.state().formData[field], `${field} should be cleared`).to.be.empty;
             });
         });
     });

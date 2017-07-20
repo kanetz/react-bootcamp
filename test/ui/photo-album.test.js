@@ -30,14 +30,15 @@ describe('<PhotoAlbum>', () => {
     describe('addPhoto()', () => {
         it('should add new photo into list', () => {
             const photoSize = wrapper.state().photos.length;
-            const newPhoto = {id: photoSize + 1};
+            const newId = wrapper.state().nextId;
+            const newPhoto = {description: 'desc', url: 'url'};
 
             wrapper.instance().addPhoto(newPhoto);
 
             const photos = wrapper.state().photos;
             expect(photos).to.have.length(photoSize + 1);
-            const actualNewPhoto = photos.find(photo => photo.id === newPhoto.id);
-            expect(actualNewPhoto).to.eql(newPhoto);
+            const actualNewPhoto = photos.find(photo => photo.id === newId);
+            expect(actualNewPhoto).to.eql({id: newId, ...newPhoto});
         });
     });
 });

@@ -6,34 +6,46 @@ class AddPhotoForm extends React.Component {
     constructor(props) {
         super(props);
         this.defaultState = {
-            filename: '',
-            description: '',
+            formData: {
+                filename: '',
+                description: '',
+            },
+            errors: {},
         };
         this.state = this.defaultState;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-        const delta = {[event.target.name]: event.target.value};
-        this.setState(prevState => ({...prevState, ...delta}));
+    handleChange(event, {name, value}) {
+        console.log('handleChange: ', name, value);
+        this.setState(prevState => ({
+            ...prevState,
+            formData: {
+                ...prevState.formData,
+                [name]: value,
+            },
+        }));
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.onAddPhoto({...this.state});
+        this.props.onAddPhoto({...this.state.formData});
         this.setState(this.defaultState);
     }
 
     render() {
+        const {formData, errors} = this.state;
         return (
-            <Form className="add-photo-form ui form">
+            <Form className="add-photo-form ui form" onSubmit={this.handleSubmit}>
                 <Form.Group>
                     <Form.Input type="file" name="filename"
-                                value={this.state.filename} onChange={this.handleChange}/>
+                                value={formData.filename} error={errors.filename}
+                                onChange={this.handleChange}/>
                     <Form.Input type="text" name="description" placeholder="Title"
-                                value={this.state.description} onChange={this.handleChange}/>
-                    <Form.Button onClick={this.handleSubmit}>Add</Form.Button>
+                                value={formData.description} error={errors.description}
+                                onChange={this.handleChange}/>
+                    <Form.Button content="Add" />
                 </Form.Group>
             </Form>
         );
