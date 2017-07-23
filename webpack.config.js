@@ -5,8 +5,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractVendorCssPlugin = new ExtractTextPlugin('vendor-bundle.css');
 const extractAppCssPlugin = new ExtractTextPlugin('[name]-bundle.css');
+const extractVendorCssPlugin = new ExtractTextPlugin('vendor-bundle.css');
 
 const webDir = path.resolve(__dirname, 'web');
 const distDir = path.resolve(__dirname, 'dist');
@@ -14,6 +14,12 @@ const distDir = path.resolve(__dirname, 'dist');
 module.exports = {
     entry: {
         app: `${webDir}/index.js`,
+        vendor: [
+            'react',
+            'react-dom',
+            'prop-types',
+            'semantic-ui-react',
+        ],
     },
     output: {
         path: distDir,
@@ -44,16 +50,6 @@ module.exports = {
                 },
             },
             {
-                test: /\.css/,
-                include: /node_modules/,
-                use: extractVendorCssPlugin.extract(
-                    {
-                        fallback: 'style-loader',
-                        use: 'css-loader',
-                    }
-                ),
-            },
-            {
                 test: /\.css$/,
                 exclude: /node_modules/,
                 use: extractAppCssPlugin.extract(
@@ -63,6 +59,16 @@ module.exports = {
                             'css-loader?modules=true&localIdentName=[local]--[hash:base64:5]&sourceMap=true',
                             'postcss-loader',
                         ],
+                    }
+                ),
+            },
+            {
+                test: /\.css/,
+                include: /node_modules/,
+                use: extractVendorCssPlugin.extract(
+                    {
+                        fallback: 'style-loader',
+                        use: 'css-loader',
                     }
                 ),
             },
@@ -82,14 +88,18 @@ module.exports = {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            minChunks: Infinity,
+        }),
+        extractVendorCssPlugin,
+        extractAppCssPlugin,
         new HtmlWebpackPlugin({
             template: `${webDir}/index.html`,
             inject: 'body',
         }),
-        extractVendorCssPlugin,
-        extractAppCssPlugin,
     ],
-    devtool: 'inline-source-map',
+    devtool: 'cheap-module-eval-source-map',
     devServer: {
         contentBase: './dist',
     },
