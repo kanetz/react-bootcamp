@@ -7,8 +7,10 @@ class PhotoList extends React.Component {
     render() {
         return (
             <Card.Group className={this.props.className} itemsPerRow="three">
-                {this.props.photos.map(photo => (
-                    <Photo key={photo.id} photo={photo} whenLiked={this.props.whenLiked}/>
+                {this.props.photos.map((photo, index) => (
+                    <Photo key={photo.id} photo={photo} index={index}
+                           whenLiked={this.props.whenLiked}
+                           whenRemoved={this.props.whenRemoved}/>
                 ))}
             </Card.Group>
         );
@@ -21,6 +23,7 @@ PhotoList.propTypes = {
         id: PropTypes.number.isRequired,
     })).isRequired,
     whenLiked: PropTypes.func,
+    whenRemoved: PropTypes.func,
 };
 
 export default PhotoList;

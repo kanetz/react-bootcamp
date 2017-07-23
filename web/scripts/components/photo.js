@@ -35,6 +35,8 @@ class Photo extends React.Component {
                     <Button basic content="Like" icon="heart"
                             label={{content: photo.likes || 0}}
                             onClick={() => this.props.whenLiked(photo)}/>
+                    <Button className="right floated" basic circular icon='remove'
+                            onClick={() => this.props.whenRemoved(this.props.index)}/>
                 </Card.Content>
             </Card>
         );
@@ -48,7 +50,9 @@ Photo.propTypes = {
         url: PropTypes.string,
         likes: PropTypes.number,
     }).isRequired,
+    index: PropTypes.number.isRequired,
     whenLiked: PropTypes.func,
+    whenRemoved: PropTypes.func,
 };
 
 export default Photo;

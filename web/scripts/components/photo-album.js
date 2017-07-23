@@ -21,6 +21,7 @@ class PhotoAlbum extends React.Component {
             nextId: 6,
         };
         this.likePhoto = this.likePhoto.bind(this);
+        this.removePhotoByIndex = this.removePhotoByIndex.bind(this);
     }
 
     likePhoto(likedPhoto) {
@@ -36,12 +37,22 @@ class PhotoAlbum extends React.Component {
         }));
     }
 
+    removePhotoByIndex(index) {
+        this.setState(prevState => ({
+            ...prevState,
+            photos: [
+                ...prevState.photos.slice(0, index),
+                ...prevState.photos.slice(index + 1),
+            ],
+        }));
+    }
+
     render() {
         return (
             <Container className={styles.photoAlbum}>
                 <Header className={styles.photoAlbumHeader} as="h1">Photo Gallery</Header>
                 <PhotoList className={styles.photoList} photos={this.state.photos}
-                           whenLiked={this.likePhoto}/>
+                           whenLiked={this.likePhoto} whenRemoved={this.removePhotoByIndex}/>
             </Container>
         );
     }
