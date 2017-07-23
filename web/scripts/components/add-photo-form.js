@@ -18,7 +18,6 @@ class AddPhotoForm extends React.Component {
     }
 
     handleChange(event, {name, value}) {
-        console.log('handleChange: ', name, value);
         this.setState(prevState => ({
             ...prevState,
             formData: {
