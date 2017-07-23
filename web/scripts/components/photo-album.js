@@ -1,7 +1,5 @@
 import React from 'react';
 import {Container, Header} from 'semantic-ui-react';
-
-import AddPhotoForm from './add-photo-form';
 import PhotoList from './photo-list';
 
 import styles from './photo-album.css';

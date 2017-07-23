@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    Card,
-    Message,
-} from 'semantic-ui-react';
+import {Card, Message} from 'semantic-ui-react';
 import Photo from './photo';
 
 class PhotoList extends React.Component {
     render() {
         return this.props.photos.length > 0 ? (
-            <Card.Group className={this.props.className} itemsPerRow="three">
+            <Card.Group className={this.props.className} itemsPerRow="four">
                 {this.props.photos.map((photo, index) => (
                     <Photo key={photo.id} photo={photo} index={index}
                            whenLiked={this.props.whenLiked}
