@@ -8,13 +8,15 @@ import PhotoAlbum from '@components/photo-album';
 import 'reset-css/reset.css';
 import 'semantic-ui-css/semantic.min.css';
 
+const getRootElement = () => document.getElementById('app');
+
 render(
     (
         <AppContainer>
             <PhotoAlbum/>
         </AppContainer>
     ),
-    document.getElementById('app')
+    getRootElement()
 );
 
 if (module.hot) {
@@ -26,7 +28,7 @@ if (module.hot) {
                     <Updated/>
                 </AppContainer>
             ),
-            document.getElementById('app')
+            getRootElement()
         );
     });
 }
