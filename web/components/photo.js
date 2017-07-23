@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Button, Card, Container, Image} from 'semantic-ui-react';
 
+import styles from './photo.css';
+
 class Photo extends React.Component {
     constructor(props) {
         super(props);
@@ -19,11 +21,10 @@ class Photo extends React.Component {
 
     render() {
         const photo = this.props.photo;
-        const imageHeight = '300px';
         return (
             <Card raised>
-                <Container style={{height: imageHeight, lineHeight: imageHeight}}>
-                    <Image src={photo.url} fluid verticalAlign="middle"/>
+                <Container className={styles.imageContainer}>
+                    <Image src={photo.url} fluid shape="rounded" verticalAlign="middle"/>
                 </Container>
 
                 <Card.Content>
