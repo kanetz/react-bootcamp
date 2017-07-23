@@ -20,21 +20,19 @@ class PhotoAlbum extends React.Component {
             ],
             nextId: 6,
         };
-        this.addPhoto = this.addPhoto.bind(this);
+        this.likePhoto = this.likePhoto.bind(this);
     }
 
-    addPhoto({description, url}) {
+    likePhoto(likedPhoto) {
         this.setState(prevState => ({
             ...prevState,
-            photos: [
-                ...prevState.photos,
-                {
-                    id: prevState.nextId,
-                    description,
-                    url,
-                },
-            ],
-            nextId: prevState.nextId + 1,
+            photos: prevState.photos.map(photo => {
+                if (photo.id !== likedPhoto.id) return photo;
+                return {
+                    ...photo,
+                    likes: (photo.likes || 0) + 1,
+                };
+            }),
         }));
     }
 
@@ -42,8 +40,8 @@ class PhotoAlbum extends React.Component {
         return (
             <Container className={styles.photoAlbum}>
                 <Header className={styles.photoAlbumHeader} as="h1">Photo Gallery</Header>
-                <PhotoList className={styles.photoList} photos={this.state.photos}/>
-                {/*<AddPhotoForm className={styles.addPhotoForm} onAddPhoto={this.addPhoto}/>*/}
+                <PhotoList className={styles.photoList} photos={this.state.photos}
+                           whenLiked={this.likePhoto}/>
             </Container>
         );
     }

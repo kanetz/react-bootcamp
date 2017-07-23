@@ -1,21 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card, Image, Icon} from 'semantic-ui-react';
+import {
+    Card,
+    Image,
+    Button,
+} from 'semantic-ui-react';
 
 class Photo extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    like() {
+        this.setState(prevState => ({
+            ...prevState,
+            photo: {
+                ...prevState.photo,
+                likes: (prevState.likes || 0) + 1,
+            }
+        }));
+    }
+
     render() {
         const photo = this.props.photo;
         return (
             <Card>
                 <Image src={photo.url}/>
+
                 <Card.Content>
                     <Card.Header className="photo-description">{photo.description}</Card.Header>
                 </Card.Content>
+
                 <Card.Content extra>
-                    <a className="right floated">
-                        <Icon name='heart' />
-                        {photo.likes || 0} likes
-                    </a>
+                    <Button basic content="Like" icon="heart"
+                            label={{content: photo.likes || 0}}
+                            onClick={() => this.props.whenLiked(photo)}/>
                 </Card.Content>
             </Card>
         );
@@ -29,6 +48,7 @@ Photo.propTypes = {
         url: PropTypes.string,
         likes: PropTypes.number,
     }).isRequired,
+    whenLiked: PropTypes.func,
 };
 
 export default Photo;
