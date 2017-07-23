@@ -6,7 +6,6 @@ import {Header} from 'semantic-ui-react';
 
 import PhotoAlbum from '@components/photo-album';
 import PhotoList from '@components/photo-list'
-import AddPhotoForm from '@components/add-photo-form';
 
 describe('<PhotoAlbum>', () => {
     let wrapper;
@@ -21,24 +20,5 @@ describe('<PhotoAlbum>', () => {
 
     it('should render <PhotoList>', () => {
         expect(wrapper.find(PhotoList).exists()).to.be.true;
-    });
-
-    it('should render <AddPhotoFrom>', () => {
-        expect(wrapper.find(AddPhotoForm).exists()).to.be.true;
-    });
-
-    describe('addPhoto()', () => {
-        it('should add new photo into list', () => {
-            const photoSize = wrapper.state().photos.length;
-            const newId = wrapper.state().nextId;
-            const newPhoto = {description: 'desc', url: 'url'};
-
-            wrapper.instance().addPhoto(newPhoto);
-
-            const photos = wrapper.state().photos;
-            expect(photos).to.have.length(photoSize + 1);
-            const actualNewPhoto = photos.find(photo => photo.id === newId);
-            expect(actualNewPhoto).to.eql({id: newId, ...newPhoto});
-        });
     });
 });
