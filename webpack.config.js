@@ -4,6 +4,9 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractVendorCssPlugin = new ExtractTextPlugin('vendor-bundle.css');
+
 const webDir = path.resolve(__dirname, 'web');
 const distDir = path.resolve(__dirname, 'dist');
 
@@ -61,10 +64,7 @@ module.exports = {
             {
                 test: /\.css/,
                 include: /node_modules/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                ],
+                use: extractVendorCssPlugin.extract('css-loader'),
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -86,11 +86,12 @@ module.exports = {
             name: "vendor",
             minChunks: Infinity,
         }),
+        extractVendorCssPlugin,
+        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: `${webDir}/index.html`,
             inject: 'body',
         }),
-        new webpack.HotModuleReplacementPlugin(),
     ],
     devtool: 'cheap-module-eval-source-map',
     devServer: {
