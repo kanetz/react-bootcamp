@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card} from 'semantic-ui-react';
+import {
+    Card,
+    Message,
+} from 'semantic-ui-react';
 import Photo from './photo';
 
 class PhotoList extends React.Component {
     render() {
-        return (
+        return this.props.photos.length > 0 ? (
             <Card.Group className={this.props.className} itemsPerRow="three">
                 {this.props.photos.map((photo, index) => (
                     <Photo key={photo.id} photo={photo} index={index}
@@ -13,6 +16,8 @@ class PhotoList extends React.Component {
                            whenRemoved={this.props.whenRemoved}/>
                 ))}
             </Card.Group>
+        ) : (
+            <Message icon="comment outline" content="There're no photos to show for the moment."/>
         );
     }
 }
