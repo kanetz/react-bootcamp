@@ -1,0 +1,9 @@
+.photoAlbum {
+  padding: 20px 0;
+
+  .photoAlbumHeader,
+  .photoList,
+  .addPhotoForm {
+    margin: 20px 0;
+  }
+}

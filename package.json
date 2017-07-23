@@ -10,6 +10,7 @@
     "flow": "./node_modules/.bin/flow status --strip-root ./src"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.2",
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
@@ -20,6 +21,7 @@
     "chai": "^4.1.0",
     "css-loader": "^0.28.4",
     "enzyme": "^2.9.1",
+    "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "flow-bin": "^0.50.0",
     "gulp": "^3.9.1",
@@ -30,6 +32,8 @@
     "mocha": "^3.4.2",
     "mocha-webpack": "^0.7.0",
     "nyc": "^11.0.3",
+    "postcss-loader": "^2.0.6",
+    "precss": "^2.0.0",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
     "sinon": "^2.3.8",

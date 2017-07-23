@@ -5,16 +5,16 @@ import Photo from './photo';
 
 class PhotoList extends React.Component {
     render() {
-        const photos = this.props.photos;
         return (
-            <Card.Group>
-                {photos.map(photo => (<Photo key={photo.id} photo={photo}/>))}
+            <Card.Group className={this.props.className} itemsPerRow="three">
+                {this.props.photos.map(photo => (<Photo key={photo.id} photo={photo}/>))}
             </Card.Group>
         );
     }
 }
 
 PhotoList.propTypes = {
+    className: PropTypes.string,
     photos: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
     })).isRequired,

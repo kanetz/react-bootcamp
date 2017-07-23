@@ -4,6 +4,10 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractVendorCssPlugin = new ExtractTextPlugin('vendor-bundle.css');
+const extractAppCssPlugin = new ExtractTextPlugin('[name]-bundle.css');
+
 const webDir = path.resolve(__dirname, 'web');
 const distDir = path.resolve(__dirname, 'dist');
 
@@ -40,23 +44,35 @@ module.exports = {
                 },
             },
             {
+                test: /\.css/,
+                include: /node_modules/,
+                use: extractVendorCssPlugin.extract(
+                    {
+                        fallback: 'style-loader',
+                        use: 'css-loader',
+                    }
+                ),
+            },
+            {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                ],
+                exclude: /node_modules/,
+                use: extractAppCssPlugin.extract(
+                    {
+                        fallback: 'style-loader',
+                        use: [
+                            'css-loader?modules=true&localIdentName=[local]--[hash:base64:5]&sourceMap=true',
+                            'postcss-loader',
+                        ],
+                    }
+                ),
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader',
-                ],
+                use: ['file-loader'],
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader',
-                ],
+                use: ['file-loader'],
             },
         ],
     },
@@ -70,6 +86,8 @@ module.exports = {
             template: `${webDir}/index.html`,
             inject: 'body',
         }),
+        extractVendorCssPlugin,
+        extractAppCssPlugin,
     ],
     devtool: 'inline-source-map',
     devServer: {

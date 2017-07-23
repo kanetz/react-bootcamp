@@ -36,7 +36,7 @@ class AddPhotoForm extends React.Component {
     render() {
         const {formData, errors} = this.state;
         return (
-            <Form className="add-photo-form ui form" onSubmit={this.handleSubmit}>
+            <Form className={this.props.className} onSubmit={this.handleSubmit}>
                 <Form.Group>
                     <Form.Input type="file" name="filename"
                                 value={formData.filename} error={errors.filename}
