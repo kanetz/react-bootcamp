@@ -13,7 +13,10 @@ const distDir = path.resolve(__dirname, 'dist');
 
 module.exports = {
     entry: {
-        app: `${webDir}/index.js`,
+        app: [
+            'react-hot-loader/patch',
+            `${webDir}/index.js`
+        ],
         vendor: [
             'react',
             'react-dom',
@@ -45,6 +48,7 @@ module.exports = {
                         plugins: [
                             'transform-runtime',
                             'transform-object-rest-spread',
+                            'react-hot-loader/babel',
                         ],
                     },
                 },
@@ -98,10 +102,12 @@ module.exports = {
             template: `${webDir}/index.html`,
             inject: 'body',
         }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
     devtool: 'cheap-module-eval-source-map',
     devServer: {
         contentBase: './dist',
+        hot: true,
     },
     resolve: {
         alias: {

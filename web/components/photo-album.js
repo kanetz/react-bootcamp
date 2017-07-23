@@ -59,7 +59,6 @@ function givenInitialState() {
         id: index + 1,
         likes: Math.floor(Math.random() * 10000),
     }));
-
     return { photos };
 }
 

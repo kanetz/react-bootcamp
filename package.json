@@ -46,6 +46,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "reset-css": "^2.2.0",
+    "react-hot-loader": "next",
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.1"
   }
