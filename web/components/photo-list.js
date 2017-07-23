@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, Message} from 'semantic-ui-react';
-import Photo from './photo';
+import Photo from '@components/photo';
 
 class PhotoList extends React.Component {
     render() {

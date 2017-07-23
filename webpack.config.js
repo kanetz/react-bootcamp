@@ -13,7 +13,7 @@ const distDir = path.resolve(__dirname, 'dist');
 
 module.exports = {
     entry: {
-        app: `${webDir}/scripts/index.js`,
+        app: `${webDir}/index.js`,
     },
     output: {
         path: distDir,
@@ -95,7 +95,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            '@components': `${webDir}/scripts/components`,
+            '@components': `${webDir}/components`,
         },
     },
     externals: {

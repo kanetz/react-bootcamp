@@ -1,8 +1,8 @@
 import React from 'react';
 import {Container, Header} from 'semantic-ui-react';
-import PhotoList from './photo-list';
+import PhotoList from '@components/photo-list';
 
-import styles from './photo-album.css';
+import styles from '@components/photo-album.css';
 
 class PhotoAlbum extends React.Component {
     constructor(props) {
