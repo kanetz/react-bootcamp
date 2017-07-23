@@ -4,10 +4,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractAppCssPlugin = new ExtractTextPlugin('[name]-bundle.css');
-const extractVendorCssPlugin = new ExtractTextPlugin('vendor-bundle.css');
-
 const webDir = path.resolve(__dirname, 'web');
 const distDir = path.resolve(__dirname, 'dist');
 
@@ -56,25 +52,19 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: /node_modules/,
-                use: extractAppCssPlugin.extract(
-                    {
-                        fallback: 'style-loader',
-                        use: [
-                            'css-loader?modules=true&localIdentName=[local]--[hash:base64:5]&sourceMap=true',
-                            'postcss-loader',
-                        ],
-                    }
-                ),
+                use: [
+                    'style-loader',
+                    'css-loader?modules=true&localIdentName=[local]--[hash:base64:5]&sourceMap=true',
+                    'postcss-loader',
+                ],
             },
             {
                 test: /\.css/,
                 include: /node_modules/,
-                use: extractVendorCssPlugin.extract(
-                    {
-                        fallback: 'style-loader',
-                        use: 'css-loader',
-                    }
-                ),
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ],
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -96,8 +86,6 @@ module.exports = {
             name: "vendor",
             minChunks: Infinity,
         }),
-        extractVendorCssPlugin,
-        extractAppCssPlugin,
         new HtmlWebpackPlugin({
             template: `${webDir}/index.html`,
             inject: 'body',
