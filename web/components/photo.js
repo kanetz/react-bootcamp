@@ -32,10 +32,10 @@ class Photo extends React.Component {
                 </Card.Content>
 
                 <Card.Content extra>
-                    <Button basic content="Like" icon="heart"
+                    <Button icon="empty heart" content="Like"
                             label={{content: photo.likes || 0}}
                             onClick={() => this.props.whenLiked(photo)}/>
-                    <Button className="right floated" basic circular icon='remove'
+                    <Button className="right floated" circular icon='remove'
                             onClick={() => this.props.whenRemoved(this.props.index)}/>
                 </Card.Content>
             </Card>
