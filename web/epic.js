@@ -1,12 +1,22 @@
 import Rx from 'rxjs';
 import {combineEpics} from 'redux-observable';
 
-import {load, loadFulfilled} from './actions';
+import * as actions from './actions';
 
-const loadEpic = action$ => action$.ofType(load.toString())
+const loadEpic = action$ => action$.ofType(actions.load.toString())
     .mergeMap(action =>
         Rx.Observable.ajax.getJSON('/fake-data.json')
-            .map(data => loadFulfilled(data))
+            .map(data => actions.loadFulfilled(data))
     );
 
-export default combineEpics(loadEpic);
+const likeEpic = action$ => action$.ofType(actions.like.toString())
+    .map(action => actions.likeFulfilled(action.payload));
+
+const removeEpic = action$ => action$.ofType(actions.remove.toString())
+    .map(action => actions.removeFulfilled(action.payload));
+
+export default combineEpics(
+    loadEpic,
+    likeEpic,
+    removeEpic,
+);

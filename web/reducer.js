@@ -1,9 +1,9 @@
 import {handleActions} from 'redux-actions';
 
-import {loadFulfilled, like, remove} from './actions';
+import * as actions from './actions';
 
 const reducer = handleActions({
-    [loadFulfilled]: (state, action) => ({
+    [actions.loadFulfilled]: (state, action) => ({
         ...state,
         photos: action.payload.map((photo, index) => ({
             ...photo,
@@ -11,7 +11,7 @@ const reducer = handleActions({
             likes: Math.floor(100 + Math.random() * 900),
         })),
     }),
-    [like]: (state, action) => ({
+    [actions.likeFulfilled]: (state, action) => ({
         ...state,
         photos: state.photos.map((photo, index) => {
             if (index !== action.payload) return photo;
@@ -21,7 +21,7 @@ const reducer = handleActions({
             };
         }),
     }),
-    [remove]: (state, action) => ({
+    [actions.removeFulfilled]: (state, action) => ({
         ...state,
         photos: [
             ...state.photos.slice(0, action.payload),
