@@ -4,8 +4,8 @@ import {shallow} from 'enzyme';
 
 import {Header} from 'semantic-ui-react';
 
-import PhotoAlbum from '@components/photo-album';
-import PhotoList from '@components/photo-list'
+import PhotoAlbum from '@containers/photo-album';
+import PhotoList from '@containers/photo-list'
 
 describe('<PhotoAlbum>', () => {
     let wrapper;

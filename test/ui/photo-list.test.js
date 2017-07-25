@@ -2,8 +2,8 @@ import React from 'react';
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
 
-import PhotoList from '@components/photo-list'
-import Photo from '@components/photo';
+import PhotoList from '@containers/photo-list'
+import Photo from '@containers/photo';
 
 describe('<PhotoList>', () => {
     it('should render <Photo> according to given photos with id as key', () => {

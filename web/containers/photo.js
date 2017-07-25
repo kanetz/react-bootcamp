@@ -1,22 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Button, Card, Container, Image} from 'semantic-ui-react';
 
 import styles from './photo.css';
+import {like, remove} from '../actions';
 
 class Photo extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    like() {
-        this.setState(prevState => ({
-            ...prevState,
-            photo: {
-                ...prevState.photo,
-                likes: (prevState.likes || 0) + 1,
-            }
-        }));
     }
 
     render() {
@@ -34,9 +26,9 @@ class Photo extends React.Component {
                 <Card.Content extra>
                     <Button icon="empty heart" content="Like"
                             label={{content: photo.likes || 0}}
-                            onClick={() => this.props.whenLiked(photo)}/>
+                            onClick={() => this.props.like(this.props.index)}/>
                     <Button className="right floated" circular icon='remove'
-                            onClick={() => this.props.whenRemoved(this.props.index)}/>
+                            onClick={() => this.props.remove(this.props.index)}/>
                 </Card.Content>
             </Card>
         );
@@ -44,15 +36,18 @@ class Photo extends React.Component {
 }
 
 Photo.propTypes = {
-    photo: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        description: PropTypes.string,
-        url: PropTypes.string,
-        likes: PropTypes.number,
-    }).isRequired,
     index: PropTypes.number.isRequired,
-    whenLiked: PropTypes.func,
-    whenRemoved: PropTypes.func,
 };
 
-export default Photo;
+const mapStateToProps = (state, props) => {
+    return {
+        photo: state.photos[props.index],
+    };
+};
+
+const mapDispatchToProps = {
+    like,
+    remove,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Photo);

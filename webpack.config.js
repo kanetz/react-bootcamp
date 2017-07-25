@@ -101,6 +101,7 @@ module.exports = {
     resolve: {
         alias: {
             '@components': `${webDir}/components`,
+            '@containers': `${webDir}/containers`,
         },
     },
     externals: {

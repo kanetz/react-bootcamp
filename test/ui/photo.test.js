@@ -2,7 +2,7 @@ import React from 'react';
 import {expect} from 'chai';
 import {mount} from 'enzyme';
 
-import Photo from '@components/photo';
+import Photo from '@containers/photo';
 import {Image} from 'semantic-ui-react';
 
 describe('<Photo>', () => {
