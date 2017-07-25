@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Container, Header} from 'semantic-ui-react';
 
 import PhotoList from '@containers/photo-list';
-import {load} from '../actions';
+import {load} from '../state/actions';
 import styles from './photo-album.css';
 
 class PhotoAlbum extends React.Component {

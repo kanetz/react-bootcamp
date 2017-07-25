@@ -7,14 +7,13 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {createEpicMiddleware} from 'redux-observable'
 import {Provider} from 'react-redux';
 
-import reducer from './reducer';
-import rootEpic from './epic';
+import reducer from './state/reducer';
+import rootEpic from './state/epic';
 
 import PhotoAlbum from '@containers/photo-album';
 
 import 'reset-css/reset.css';
 import 'semantic-ui-css/semantic.min.css';
-
 
 const store = createStore(
     reducer,

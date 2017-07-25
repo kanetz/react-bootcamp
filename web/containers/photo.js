@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Button, Card, Container, Image} from 'semantic-ui-react';
 
 import styles from './photo.css';
-import {like, remove} from '../actions';
+import {like, remove} from '../state/actions';
 
 class Photo extends React.Component {
     constructor(props) {
