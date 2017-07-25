@@ -7,6 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractVendorCssPlugin = new ExtractTextPlugin('vendor-bundle.css');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const webDir = path.resolve(__dirname, 'web');
 const distDir = path.resolve(__dirname, 'dist');
 
@@ -92,6 +94,7 @@ module.exports = {
             template: `${webDir}/index.html`,
             inject: 'body',
         }),
+        new CopyWebpackPlugin([{from: `${webDir}/fake-data.json`}]),
     ],
     devtool: 'cheap-module-eval-source-map',
     devServer: {

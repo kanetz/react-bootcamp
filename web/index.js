@@ -2,18 +2,27 @@ import {AppContainer} from 'react-hot-loader'
 
 import React from 'react';
 import {render} from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {createEpicMiddleware} from 'redux-observable'
 import {Provider} from 'react-redux';
 
 import reducer from './reducer';
+import rootEpic from './epic';
+
 import PhotoAlbum from '@containers/photo-album';
 
 import 'reset-css/reset.css';
 import 'semantic-ui-css/semantic.min.css';
 
+
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    composeWithDevTools(
+        applyMiddleware(
+            createEpicMiddleware(rootEpic),
+        )
+    ),
 );
 const getRootElement = () => document.getElementById('app');
 

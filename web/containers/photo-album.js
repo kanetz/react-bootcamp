@@ -3,10 +3,14 @@ import {connect} from 'react-redux';
 import {Container, Header} from 'semantic-ui-react';
 
 import PhotoList from '@containers/photo-list';
-
+import {load} from '../actions';
 import styles from './photo-album.css';
 
 class PhotoAlbum extends React.Component {
+    componentDidMount() {
+        this.props.load();
+    }
+
     render() {
         return (
             <Container className={styles.photoAlbum}>
@@ -17,4 +21,6 @@ class PhotoAlbum extends React.Component {
     }
 }
 
-export default connect()(PhotoAlbum);
+const mapDispatchToProps = {load};
+
+export default connect(null, mapDispatchToProps)(PhotoAlbum);
