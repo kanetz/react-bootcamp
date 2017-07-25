@@ -2,15 +2,38 @@ import {handleActions} from 'redux-actions';
 
 import * as actions from './actions';
 
+const defaultState = {
+    photos: [],
+    loading: false,
+    error: null,
+};
+
 const reducer = handleActions({
-    [actions.loadFulfilled]: (state, action) => ({
+    [actions.load]: state => ({
         ...state,
-        photos: action.payload.map((photo, index) => ({
-            ...photo,
-            id: index + 1,
-            likes: Math.floor(100 + Math.random() * 900),
-        })),
+        loading: true,
+        error: null,
     }),
+    [actions.loadFulfilled]: (state, action) => {
+        if(action.error) {
+            return {
+                ...state,
+                photos: [],
+                loading: false,
+                error: action.payload,
+            };
+        }
+
+        return {
+            ...state,
+            photos: action.payload.map((photo, index) => ({
+                ...photo,
+                id: index + 1,
+                likes: Math.floor(100 + Math.random() * 900),
+            })),
+            loading: false,
+        };
+    },
     [actions.likeFulfilled]: (state, action) => ({
         ...state,
         photos: state.photos.map((photo, index) => {
@@ -28,6 +51,6 @@ const reducer = handleActions({
             ...state.photos.slice(action.payload + 1),
         ],
     }),
-}, {photos: []});
+}, defaultState);
 
 export default reducer;

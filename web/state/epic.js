@@ -6,7 +6,9 @@ import * as actions from './actions';
 const loadEpic = action$ => action$.ofType(actions.load.toString())
     .mergeMap(action =>
         Rx.Observable.ajax.getJSON('/fake-data.json')
+            .delay(2000)
             .map(data => actions.loadFulfilled(data))
+            .catch(error => Rx.Observable.of(actions.loadFulfilled(error)))
     );
 
 const likeEpic = action$ => action$.ofType(actions.like.toString())
